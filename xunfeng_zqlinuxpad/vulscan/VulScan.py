@@ -10,6 +10,7 @@ import json
 import re
 import uuid
 import os
+import mylog
 
 sys.path.append(sys.path[0] + '/vuldb')
 sys.path.append(sys.path[0] + "/../")
@@ -228,9 +229,10 @@ def get_config():
         # malloy add password
         passdic_result = read_file_as_password_dic()
         if passdic_result:
+            mylog.logging.warning("successfully load password_rkl")
             password_dic = passdic_result
         else:
-            print 'get password by web'
+            mylog.logging.warning("can't load password_rkl")
             password_dic = pass_row['value'].split('\n')
         # malloy add password
         thread_count = int(thread_row['value'])

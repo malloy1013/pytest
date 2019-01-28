@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="267cdab7-214a-40b7-8442-132f19115988" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/testmongo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask_test/myscan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask_test/myscan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/nascan/lib/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/nascan/lib/mongo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/views/lib/Conn.py" beforeDir="false" afterPath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/views/lib/Conn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/vulscan/VulScan.py" beforeDir="false" afterPath="$PROJECT_DIR$/../xunfeng_zqlinuxpad/vulscan/VulScan.py" afterDir="false" />
-    </list>
+    <list default="true" id="267cdab7-214a-40b7-8442-132f19115988" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testdd/testdd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+            <state relative-caret-position="363">
+              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -336,12 +329,12 @@
       <workItem from="1548030933102" duration="11004000" />
       <workItem from="1548117854745" duration="598000" />
       <workItem from="1548128814042" duration="3208000" />
-      <workItem from="1548679813510" duration="1140000" />
+      <workItem from="1548679813510" duration="1189000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58514000" />
+    <option name="totallyTimeSpent" value="58563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -353,7 +346,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.38961038" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39703155" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39703155" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -448,8 +441,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testdd/testdd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        <state relative-caret-position="363">
+          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
