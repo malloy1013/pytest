@@ -17,7 +17,7 @@ from Config import ProductionConfig
 
 db_conn = pymongo.MongoClient(ProductionConfig.DB, ProductionConfig.PORT)
 na_db = getattr(db_conn, ProductionConfig.DBNAME)
-na_db.authenticate(ProductionConfig.DBUSERNAME, ProductionConfig.DBPASSWORD)
+# na_db.authenticate(ProductionConfig.DBUSERNAME, ProductionConfig.DBPASSWORD)
 na_task = na_db.Task
 na_result = na_db.Result
 na_plugin = na_db.Plugin
@@ -201,15 +201,20 @@ def monitor():
         else:
             time.sleep(60)
 
-
+m = __file__
+current_dir = os.path.dirname(m)
+parent_dir = os.path.dirname(current_dir)
+grand_parent_dir = os.path.dirname(parent_dir)
 def read_file_as_password_dic():
-    file_path =sys.path[1]+'/rkl'+'/rkolin.txt'
-    print file_path
+    # file_path =grand_parent_dir+'/rkl'+'/rkolin.txt'
+    file_path = os.path.join(parent_dir,'rkl','rkolin.txt')
+    # print file_path
     if not os.path.isfile(file_path):
         return None
+
     all_the_text = open(file_path).read()
     result = all_the_text.decode('utf-8').split('\r\n')
-    print 'get password_by rkolin.txt\n'
+    # print 'get password_by rkolin.txt\n'
     # print result
     return result
 
@@ -222,7 +227,7 @@ def get_config():
         white_row = config_info['config']['White_list']
         # malloy add password
         passdic_result = read_file_as_password_dic()
-        if not passdic_result:
+        if passdic_result:
             password_dic = passdic_result
         else:
             print 'get password by web'
