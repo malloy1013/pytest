@@ -1,0 +1,11 @@
+*.pyc
+*.log
+*DS_Store
+.idea
+*.out
+
+
+Config.py
+
+Run.py
+xunfengdb/
