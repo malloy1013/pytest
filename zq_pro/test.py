@@ -1,13 +1,13 @@
 from testmongo import *
 from testdd.testdd import *
-import numpy as np
-import pandas as pd
+# import numpy as np
+# import pandas as pd
 #
 import threading
 import thread
 import os
 import time
-
+import requests
 # print config
 # print Collection_Heartbeat
 # # print xunfengDB.Collection_Task.find()
@@ -101,4 +101,7 @@ if __name__ == '__main__':
     #
     #     time.sleep(5)
     # print Collection_Plugin.find().count()
-    print Collection_Plugin.update_many({"count":1},{"$set":{"count":0}})
+    # print Collection_Plugin.update_many({"count":1},{"$set":{"count":0}})
+
+    r = requests.get('https://www.zhihu.com/question/275359100')
+    print r.text
