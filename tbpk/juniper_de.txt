@@ -1,0 +1,469 @@
+admin> show version 
+Model: junosv-firefly
+JUNOS Software Release [12.1X44-D10.4]
+admin# show 
+## Last changed: 2019-02-15 09:50:06 UTC
+version 12.1X44.4;
+system {
+    root-authentication {
+        encrypted-password "$1$KcYO9070$Dbj1dMh19gg5WwhSC52um/"; ## SECRET-DATA
+    }
+    login {
+        user admin {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$1$.hEP8GkO$BpriRFoGXqVNveh3jXqZ2/"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh;
+        telnet;
+        web-management {
+            http {
+                interface ge-0/0/0.0;
+            }
+        }                               
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {
+            any any;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    license {
+        autoupdate {
+            url https://ae1.juniper.net/junos/key_retrieval;
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        inactive: unit 0 {
+            family inet {               
+                address 192.168.121.26/24;
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 192.168.121.254;
+    }
+}
+security {
+    screen {
+        ids-option untrust-screen {
+            icmp {
+                ping-death;
+            }
+            ip {
+                source-route-option;
+                tear-drop;
+            }
+            tcp {
+                syn-flood {
+                    alarm-threshold 1024;
+                    attack-threshold 200;
+                    source-threshold 1024;
+                    destination-threshold 2048;
+                    queue-size 2000; ## Warning: 'queue-size' is deprecated
+                    timeout 20;
+                }
+                land;
+            }
+        }
+    }
+    policies {
+        from-zone trust to-zone trust {
+            policy default-permit {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }                               
+        from-zone trust to-zone untrust {
+            policy default-permit {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    permit;
+                }
+            }
+        }
+        from-zone untrust to-zone trust {
+            policy default-deny {
+                match {
+                    source-address any;
+                    destination-address any;
+                    application any;
+                }
+                then {
+                    deny;
+                }
+            }                           
+        }
+    }
+    zones {
+        security-zone trust {
+            tcp-rst;
+            host-inbound-traffic {
+                system-services {
+                    all;
+                }
+                protocols {
+                    all;
+                }
+            }
+            interfaces {
+                ge-0/0/0.0 {
+                    host-inbound-traffic {
+                        system-services {
+                            http;
+                            https;
+                            ssh;
+                            telnet;
+                            dhcp;
+                        }               
+                    }
+                }
+            }
+        }
+        security-zone untrust {
+            screen untrust-screen;
+            host-inbound-traffic {
+                system-services {
+                    http;
+                    ping;
+                    telnet;
+                }
+            }
+            interfaces {
+                ge-0/0/0.0;
+            }
+        }
+    }
+}
+
+[edit]
+admin# 
+admin# show interfaces 
+ge-0/0/0 {
+    inactive: unit 0 {
+        family inet {
+            address 192.168.121.26/24;
+        }
+    }
+}
+
+[edit]
+admin# run show interfaces ge-0/0/0.0 
+  Logical interface ge-0/0/0.0 (Index 69) (SNMP ifIndex 514) 
+    Flags: SNMP-Traps 0x4000 Encapsulation: ENET2
+    Input packets : 1483 
+    Output packets: 1730
+    Security: Zone: trust
+    Allowed host-inbound traffic : dhcp http https ssh telnet
+    Protocol inet, MTU: 1500
+      Flags: Sendbcast-pkt-to-re, Is-Primary
+      Addresses, Flags: Is-Default Is-Preferred Is-Primary
+        Destination: 192.168.121/24, Local: 192.168.121.26, Broadcast: 192.168.121.255
+
+[edit]
+admin# show security zones    
+security-zone trust {
+    tcp-rst;
+    host-inbound-traffic {
+        system-services {
+            all;
+        }
+        protocols {
+            all;
+        }
+    }
+    interfaces {
+        ge-0/0/0.0 {
+            host-inbound-traffic {
+                system-services {
+                    http;
+                    https;
+                    ssh;
+                    telnet;
+                    dhcp;
+                }
+            }
+        }
+    }
+}
+security-zone untrust {
+    screen untrust-screen;
+    host-inbound-traffic {
+        system-services {
+            http;
+            ping;
+            telnet;
+        }
+    }
+    interfaces {
+        ge-0/0/0.0;
+    }
+}
+
+[edit]
+admin# 
+admin# run show security zones 
+
+Security zone: trust
+  Send reset for non-SYN session TCP packets: On
+  Policy configurable: Yes  
+  Interfaces bound: 1
+  Interfaces:
+    ge-0/0/0.0
+
+Security zone: untrust
+  Send reset for non-SYN session TCP packets: Off
+  Policy configurable: Yes  
+  Screen: untrust-screen  
+  Interfaces bound: 0
+  Interfaces:
+
+Security zone: junos-host
+  Send reset for non-SYN session TCP packets: Off
+  Policy configurable: Yes  
+  Interfaces bound: 0
+  Interfaces:
+
+[edit]
+admin#
+admin# run show system users 
+ 9:59AM  up 41 mins, 3 users, load averages: 0.00, 0.01, 0.00
+USER     TTY      FROM                              LOGIN@  IDLE WHAT
+root     v0       -                                9:19AM      3 cli           
+admin    p0       192.168.111.3                    9:56AM      - -cli (cli)    
+admin    jweb1    192.168.111.3                    9:39AM     19
+
+[edit]
+admin# 
+admin# run show system software detail 
+Information for junos:
+
+Comment:
+JUNOS Software Release [12.1X44-D10.4]
+
+
+Depends on:
+Description:
+JUNOS Software Release
+Copyright (c) 1996-2013, Juniper Networks, Inc.
+All rights reserved.
+
+Software version:       12.1X44-D10.4
+
+This package contains OS components.
+
+
+
+
+[edit]
+admin#
+admin# run show interfaces brief 
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+  Logical interface ge-0/0/0.0 
+    Flags: SNMP-Traps 0x4000 Encapsulation: ENET2
+    Security: Zone: trust
+    Allowed host-inbound traffic : dhcp http https ssh telnet
+    inet  192.168.121.26/24
+
+Physical interface: gr-0/0/0, Enabled, Physical link is Up
+  Type: GRE, Link-level type: GRE, MTU: Unlimited, Speed: 800mbps
+  Link flags     : Scheduler Keepalives DTE
+  Device flags   : Present Running
+  Interface flags: Point-To-Point
+
+Physical interface: ip-0/0/0, Enabled, Physical link is Up
+  Type: IPIP, Link-level type: IP-over-IP, MTU: Unlimited, Speed: 800mbps
+  Link flags     : Scheduler Keepalives DTE
+  Device flags   : Present Running
+
+Physical interface: lsq-0/0/0, Enabled, Physical link is Up
+  Link-level type: LinkService, MTU: 1504
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps Internal: 0x4000
+
+Physical interface: lt-0/0/0, Enabled, Physical link is Up
+  Type: Logical-tunnel, Link-level type: Logical-tunnel, MTU: Unlimited, Clocking: Unspecified, Speed: 800mbps
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps
+
+Physical interface: mt-0/0/0, Enabled, Physical link is Up
+  Type: Multicast-GRE, Link-level type: GRE, MTU: Unlimited, Speed: 800mbps
+  Link flags     : Keepalives DTE
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+
+Physical interface: sp-0/0/0, Enabled, Physical link is Up
+  Type: Adaptive-Services, Link-level type: Adaptive-Services, MTU: 9192, Clocking: Unspecified, Speed: 800mbps
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps Internal: 0x4000
+
+  Logical interface sp-0/0/0.0 
+    Flags: Point-To-Point SNMP-Traps Encapsulation: Adaptive-Services
+    Security: Zone: Null
+    inet
+
+  Logical interface sp-0/0/0.16383 
+    Flags: Point-To-Point SNMP-Traps Encapsulation: Adaptive-Services
+    Security: Zone: Null
+    inet  10.0.0.1         --> 10.0.0.16
+          10.0.0.6         --> 0/0
+          128.0.0.1        --> 128.0.1.16
+          128.0.0.6        --> 0/0
+                                        
+Physical interface: ge-0/0/1, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,
+  Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: dsc, Enabled, Physical link is Up
+  Type: Software-Pseudo, Link-level type: Unspecified, MTU: Unlimited, Clocking: Unspecified, Speed: Unspecified
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps
+
+Physical interface: gre, Enabled, Physical link is Up
+  Type: GRE, Link-level type: GRE, MTU: Unlimited, Speed: Unlimited
+  Link flags     : Keepalives DTE
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps
+
+Physical interface: ipip, Enabled, Physical link is Up
+  Type: IPIP, Link-level type: IP-over-IP, MTU: Unlimited, Speed: Unlimited
+  Link flags     : Keepalives DTE
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+
+Physical interface: lo0, Enabled, Physical link is Up
+  Type: Loopback, Link-level type: Unspecified, MTU: Unlimited, Clocking: Unspecified, Speed: Unspecified
+  Device flags   : Present Running Loopback
+  Interface flags: SNMP-Traps
+
+  Logical interface lo0.16384 
+    Flags: SNMP-Traps Encapsulation: Unspecified
+    Security: Zone: Null
+    inet  127.0.0.1        --> 0/0
+
+  Logical interface lo0.16385 
+    Flags: SNMP-Traps Encapsulation: Unspecified
+    Security: Zone: Null
+    inet  10.0.0.1         --> 0/0
+          10.0.0.16        --> 0/0
+          128.0.0.1        --> 0/0
+          128.0.0.4        --> 0/0
+          128.0.1.16       --> 0/0
+
+  Logical interface lo0.32768 
+    Flags: Encapsulation: Unspecified
+    Security: Zone: Null
+
+Physical interface: lsi, Enabled, Physical link is Up
+  Type: Software-Pseudo, Link-level type: LSI, MTU: 1496, Clocking: Unspecified, Speed: Unlimited
+  Device flags   : Present Running
+
+Physical interface: mtun, Enabled, Physical link is Up
+  Type: Multicast-GRE, Link-level type: GRE, MTU: Unlimited, Speed: Unlimited
+  Link flags     : Keepalives DTE
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+                                        
+Physical interface: pimd, Enabled, Physical link is Up
+  Type: PIMD, Link-level type: PIM-Decapsulator, MTU: Unlimited, Speed: Unlimited
+  Device flags   : Present Running
+
+Physical interface: pime, Enabled, Physical link is Up
+  Type: PIME, Link-level type: PIM-Encapsulator, MTU: Unlimited, Speed: Unlimited
+  Device flags   : Present Running
+
+Physical interface: pp0, Enabled, Physical link is Up
+  Type: PPPoE, Link-level type: PPPoE, MTU: 1532, Speed: Unspecified
+  Device flags   : Present Running
+  Interface flags: Point-To-Point SNMP-Traps
+
+Physical interface: ppd0, Enabled, Physical link is Up
+  Type: PIMD, Link-level type: PIM-Decapsulator, MTU: Unlimited, Speed: 800mbps
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+
+Physical interface: ppe0, Enabled, Physical link is Up
+  Type: PIME, Link-level type: PIM-Encapsulator, MTU: Unlimited, Speed: 800mbps
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+
+Physical interface: st0, Enabled, Physical link is Up
+  Type: Secure-Tunnel, Link-level type: Secure-Tunnel, MTU: 9192, Speed: Unspecified
+  Device flags   : Present Running
+  Interface flags: Point-To-Point
+
+Physical interface: tap, Enabled, Physical link is Up
+  Type: Software-Pseudo, Link-level type: Interface-Specific, MTU: Unlimited, Clocking: Unspecified, Speed: Unlimited
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+
+Physical interface: vlan, Enabled, Physical link is Down
+  Type: VLAN, Link-level type: VLAN, MTU: 1518, Clocking: Unspecified, Speed: 1000mbps
+  Device flags   : Present Running Down
+  Interface flags: Hardware-Down
+
+[edit]
+admin# 
+admin# show security screen    
+ids-option untrust-screen {
+    icmp {
+        ping-death;
+    }
+    ip {
+        source-route-option;
+        tear-drop;
+    }
+    tcp {
+        syn-flood {
+            alarm-threshold 1024;
+            attack-threshold 200;
+            source-threshold 1024;
+            destination-threshold 2048;
+            queue-size 2000; ## Warning: 'queue-size' is deprecated
+            timeout 20;
+        }
+        land;
+    }
+}
+
+[edit]
+admin# 
+admin# run show security nat static rule all 
+Total static-nat rules: 0
+Total referenced IPv4/IPv6 ip-prefixes: 0/0
+
+[edit]
+admin# 

@@ -1,0 +1,552 @@
+
+version 11.4R1.6;
+system {
+    host-name EX4200;
+    time-zone Asia/Shanghai;
+    root-authentication {
+        encrypted-password "$1$EZ/LlpMC$3Ruw9sYo1j1na7OOH68HD0"; ## SECRET-DATA
+    }
+    login {
+        user admin {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$1$N.i75GKG$w6mUOilTGkdoT1LsWv055/"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        telnet;
+        web-management {                
+            http;
+        }
+        dhcp {
+            pool 192.168.10.0/24 {
+                address-range low 192.168.10.2 high 192.168.10.254;
+                router {
+                    192.168.10.1;
+                }
+            }
+            pool 192.168.12.0/24 {
+                address-range low 192.168.12.2 high 192.168.12.254;
+                router {
+                    192.168.12.1;
+                }
+            }
+            pool 192.168.14.0/24 {
+                address-range low 192.168.14.2 high 192.168.14.254;
+                router {
+                    192.168.14.1;
+                }
+            }
+            pool 192.168.16.0/24 {
+                address-range low 192.168.16.2 high 192.168.16.254;
+                router {
+                    192.168.16.1;
+                }
+            }
+            pool 221.0.0.0/24 {
+                address-range low 221.0.0.2 high 221.0.0.254;
+                router {
+                    221.0.0.1;
+                }
+            }
+            pool 2.0.0.0/24 {
+                address-range low 2.0.0.2 high 2.0.0.254;
+                router {
+                    2.0.0.1;
+                }
+            }
+        }
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {                 
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+}
+chassis {
+    alarm {
+        management-ethernet {
+            link-down ignore;
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }                                   
+    ge-0/0/1 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/2 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/3 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/4 {
+        unit 0 {                        
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/5 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/6 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/7 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;       
+            }
+        }
+    }
+    ge-0/0/8 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/9 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/10 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }                               
+    }
+    ge-0/0/11 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/12 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/13 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/14 {                         
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/15 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/16 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/17 {
+        unit 0 {
+            family ethernet-switching { 
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/18 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/19 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/20 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }                           
+        }
+    }
+    ge-0/0/21 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/22 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/23 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }                                   
+    ge-0/0/24 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/25 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/26 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/27 {
+        unit 0 {                        
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/28 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/29 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/30 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;       
+            }
+        }
+    }
+    ge-0/0/31 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/32 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/33 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }                               
+    }
+    ge-0/0/34 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/35 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/36 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/37 {                         
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/38 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/39 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/40 {
+        unit 0 {
+            family ethernet-switching { 
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/41 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/42 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/43 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }                           
+        }
+    }
+    ge-0/0/44 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/45 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }
+    ge-0/0/46 {
+        unit 0 {
+            family ethernet-switching {
+                port-mode access;
+            }
+        }
+    }                                   
+    ge-0/0/47 {
+        unit 0 {
+            family inet {
+                address 192.168.1.252/24;
+                address 172.28.1.254/24;
+            }
+        }
+    }
+    ge-0/1/0 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    xe-0/1/0 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    ge-0/1/1 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }                                   
+    xe-0/1/1 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    ge-0/1/2 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    xe-0/1/2 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    ge-0/1/3 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    me0 {
+        unit 0 {
+            family inet {               
+                address 101.1.1.1/24;
+            }
+        }
+    }
+    vlan {
+        unit 250 {
+            family inet {
+                address 221.0.0.1/24;
+            }
+        }
+        unit 1001 {
+            family inet {
+                address 99.0.0.1/24;
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route 0.0.0.0/0 next-hop 10.10.10.2;
+        route 9.0.0.0/24 next-hop 220.0.0.1;
+    }
+}                                       
+protocols {
+    ospf {
+        area 0.0.0.100 {
+            interface vlan.10;
+            interface vlan.14;
+            interface vlan.16;
+            interface vlan.20;
+            interface vlan.250;
+            interface vlan.1;
+            interface vlan.3;
+        }
+    }
+    igmp-snooping {
+        vlan all;
+    }
+    rstp;
+    lldp {
+        interface all;
+    }
+    lldp-med {
+        interface all;
+    }
+    sflow {                             
+        sample-rate 1000; ## Warning: 'rate' is deprecated
+        collector 172.28.1.111;
+        interfaces ge-0/0/5.0;
+    }
+}
+firewall {
+    family ethernet-switching {
+        filter test123 {
+            term 1 {
+                from {
+                    source-address {
+                        31.0.0.0/24;
+                    }
+                    destination-address {
+                        32.0.0.0/24;
+                    }
+                }
+                then discard;
+            }
+            term 2 {
+                then accept;
+            }
+        }                               
+    }
+}
+ethernet-switching-options {
+    analyzer port-monitor {
+        input {
+            ingress {
+                interface ge-0/0/5.0;
+            }
+        }
+        output {
+            interface {
+                ge-0/0/7.0;
+            }
+        }
+    }
+    voip;
+    storm-control {
+        interface all;
+    }
+}
+poe {
+    interface all;
+}                                       

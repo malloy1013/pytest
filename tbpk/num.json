@@ -1,0 +1,424 @@
+{
+  "": "",
+  "Interfaces": [
+    "bound: 1",
+    "bound: 0",
+    "bound: 0"
+  ],
+  "[edit]": "",
+  "128.0.0.4": "       --> 0/0",
+  "Type:": [
+    "GRE, Link-level type: GRE, MTU: Unlimited, Speed: 800mbps",
+    "IPIP, Link-level type: IP-over-IP, MTU: Unlimited, Speed: 800mbps",
+    "Logical-tunnel, Link-level type: Logical-tunnel, MTU: Unlimited, Clocking: Unspecified, Speed: 800mbps",
+    "Multicast-GRE, Link-level type: GRE, MTU: Unlimited, Speed: 800mbps",
+    "Adaptive-Services, Link-level type: Adaptive-Services, MTU: 9192, Clocking: Unspecified, Speed: 800mbps",
+    "Software-Pseudo, Link-level type: Unspecified, MTU: Unlimited, Clocking: Unspecified, Speed: Unspecified",
+    "GRE, Link-level type: GRE, MTU: Unlimited, Speed: Unlimited",
+    "IPIP, Link-level type: IP-over-IP, MTU: Unlimited, Speed: Unlimited",
+    "Loopback, Link-level type: Unspecified, MTU: Unlimited, Clocking: Unspecified, Speed: Unspecified",
+    "Software-Pseudo, Link-level type: LSI, MTU: 1496, Clocking: Unspecified, Speed: Unlimited",
+    "Multicast-GRE, Link-level type: GRE, MTU: Unlimited, Speed: Unlimited",
+    "PIMD, Link-level type: PIM-Decapsulator, MTU: Unlimited, Speed: Unlimited",
+    "PIME, Link-level type: PIM-Encapsulator, MTU: Unlimited, Speed: Unlimited",
+    "PPPoE, Link-level type: PPPoE, MTU: 1532, Speed: Unspecified",
+    "PIMD, Link-level type: PIM-Decapsulator, MTU: Unlimited, Speed: 800mbps",
+    "PIME, Link-level type: PIM-Encapsulator, MTU: Unlimited, Speed: 800mbps",
+    "Secure-Tunnel, Link-level type: Secure-Tunnel, MTU: 9192, Speed: Unspecified",
+    "Software-Pseudo, Link-level type: Interface-Specific, MTU: Unlimited, Clocking: Unspecified, Speed: Unlimited",
+    "VLAN, Link-level type: VLAN, MTU: 1518, Clocking: Unspecified, Speed: 1000mbps"
+  ],
+  "ge-0/0/0": {
+    "inactive: unit 0": {
+      "family inet": {
+        "address": "192.168.121.26/24"
+      }
+    }
+  },
+  "128.0.0.1": [
+    "       --> 128.0.1.16",
+    "       --> 0/0"
+  ],
+  "routing-options": {
+    "static": {
+      "route": "0.0.0.0/0 next-hop 192.168.121.254"
+    }
+  },
+  "Send": [
+    "reset for non-SYN session TCP packets: On",
+    "reset for non-SYN session TCP packets: Off",
+    "reset for non-SYN session TCP packets: Off"
+  ],
+  "Flags:": [
+    "SNMP-Traps 0x4000 Encapsulation: ENET2",
+    "Sendbcast-pkt-to-re, Is-Primary",
+    "SNMP-Traps 0x4000 Encapsulation: ENET2",
+    "Point-To-Point SNMP-Traps Encapsulation: Adaptive-Services",
+    "Point-To-Point SNMP-Traps Encapsulation: Adaptive-Services",
+    "SNMP-Traps Encapsulation: Unspecified",
+    "SNMP-Traps Encapsulation: Unspecified",
+    "Encapsulation: Unspecified"
+  ],
+  "Policy": [
+    "configurable: Yes  ",
+    "configurable: Yes  ",
+    "configurable: Yes  "
+  ],
+  "9:59AM": " up 41 mins, 3 users, load averages: 0.00, 0.01, 0.00",
+  "Security:": [
+    "Zone: trust",
+    "Zone: trust",
+    "Zone: Null",
+    "Zone: Null",
+    "Zone: Null",
+    "Zone: Null",
+    "Zone: Null"
+  ],
+  "Logical": [
+    "interface ge-0/0/0.0 (Index 69) (SNMP ifIndex 514) ",
+    "interface ge-0/0/0.0 ",
+    "interface sp-0/0/0.0 ",
+    "interface sp-0/0/0.16383 ",
+    "interface lo0.16384 ",
+    "interface lo0.16385 ",
+    "interface lo0.32768 "
+  ],
+  "security": {
+    "policies": {
+      "from-zone trust to-zone trust": {
+        "policy default-permit": {
+          "match": {
+            "destination-address": "any",
+            "application": "any",
+            "source-address": "any"
+          },
+          "then": {
+            "permit": ""
+          }
+        }
+      },
+      "from-zone untrust to-zone trust": {
+        "policy default-deny": {
+          "match": {
+            "destination-address": "any",
+            "application": "any",
+            "source-address": "any"
+          },
+          "then": {
+            "deny": ""
+          }
+        }
+      },
+      "from-zone trust to-zone untrust": {
+        "policy default-permit": {
+          "match": {
+            "destination-address": "any",
+            "application": "any",
+            "source-address": "any"
+          },
+          "then": {
+            "permit": ""
+          }
+        }
+      }
+    },
+    "zones": {
+      "security-zone untrust": {
+        "host-inbound-traffic": {
+          "system-services": {
+            "http": "",
+            "ping": "",
+            "telnet": ""
+          }
+        },
+        "interfaces": {
+          "ge-0/0/0.0": ""
+        },
+        "screen": "untrust-screen"
+      },
+      "security-zone trust": {
+        "host-inbound-traffic": {
+          "protocols": {
+            "all": ""
+          },
+          "system-services": {
+            "all": ""
+          }
+        },
+        "tcp-rst": "",
+        "interfaces": {
+          "ge-0/0/0.0": {
+            "host-inbound-traffic": {
+              "system-services": {
+                "https": "",
+                "http": "",
+                "ssh": "",
+                "dhcp": "",
+                "telnet": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "screen": {
+      "ids-option untrust-screen": {
+        "icmp": {
+          "ping-death": ""
+        },
+        "tcp": {
+          "syn-flood": {
+            "attack-threshold": "200",
+            "alarm-threshold": "1024",
+            "source-threshold": "1024",
+            "destination-threshold": "2048",
+            "timeout": "20"
+          },
+          "land": ""
+        },
+        "ip": {
+          "source-route-option": "",
+          "tear-drop": ""
+        }
+      }
+    }
+  },
+  "USER": "    TTY      FROM                              LOGIN@  IDLE WHAT",
+  "Link-level": [
+    "type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,",
+    "type: LinkService, MTU: 1504",
+    "type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled,"
+  ],
+  "10.0.0.6": "        --> 0/0",
+  "system": {
+    "services": {
+      "ssh": "",
+      "web-management": {
+        "http": {
+          "interface": "ge-0/0/0.0"
+        }
+      },
+      "telnet": ""
+    },
+    "license": {
+      "autoupdate": {
+        "url": "https://ae1.juniper.net/junos/key_retrieval"
+      }
+    },
+    "syslog": {
+      "user *": {
+        "any": "emergency"
+      },
+      "file interactive-commands": {
+        "interactive-commands": "any"
+      },
+      "file messages": {
+        "any": "any",
+        "authorization": "info"
+      }
+    },
+    "root-authentication": {},
+    "login": {
+      "user admin": {
+        "authentication": {},
+        "class": "super-user",
+        "uid": "2000"
+      }
+    }
+  },
+  "interfaces": {
+    "ge-0/0/0": {
+      "inactive: unit 0": {
+        "family inet": {
+          "address": "192.168.121.26/24"
+        }
+      }
+    }
+  },
+  "Interfaces:": "",
+  "Total": [
+    "static-nat rules: 0",
+    "referenced IPv4/IPv6 ip-prefixes: 0/0"
+  ],
+  "Comment:": "",
+  "Description:": "",
+  "inet": [
+    "",
+    " 10.0.0.1         --> 10.0.0.16",
+    " 127.0.0.1        --> 0/0",
+    " 10.0.0.1         --> 0/0"
+  ],
+  "Depends": "on:",
+  "128.0.1.16": "      --> 0/0",
+  "security-zone trust": {
+    "host-inbound-traffic": {
+      "protocols": {
+        "all": ""
+      },
+      "system-services": {
+        "all": ""
+      }
+    },
+    "tcp-rst": "",
+    "interfaces": {
+      "ge-0/0/0.0": {
+        "host-inbound-traffic": {
+          "system-services": {
+            "https": "",
+            "http": "",
+            "ssh": "",
+            "dhcp": "",
+            "telnet": ""
+          }
+        }
+      }
+    }
+  },
+  "This": "package contains OS components.",
+  "Output": "packets: 1730",
+  "Screen:": "untrust-screen  ",
+  "security-zone untrust": {
+    "host-inbound-traffic": {
+      "system-services": {
+        "http": "",
+        "ping": "",
+        "telnet": ""
+      }
+    },
+    "interfaces": {
+      "ge-0/0/0.0": ""
+    },
+    "screen": "untrust-screen"
+  },
+  "Information": "for junos:",
+  "10.0.0.16": "       --> 0/0",
+  "Security": [
+    "zone: trust",
+    "zone: untrust",
+    "zone: junos-host"
+  ],
+  "All": "rights reserved.",
+  "ge-0/0/0.0": "",
+  "Addresses,": "Flags: Is-Default Is-Preferred Is-Primary",
+  "JUNOS": [
+    "Software Release [12.1X44-D10.4]",
+    "Software Release [12.1X44-D10.4]",
+    "Software Release"
+  ],
+  "admin": [
+    "   p0       192.168.111.3                    9:56AM      - -cli (cli)    ",
+    "   jweb1    192.168.111.3                    9:39AM     19"
+  ],
+  "root": "    v0       -                                9:19AM      3 cli           ",
+  "Input": "packets : 1483 ",
+  "Remote": [
+    "fault: Online",
+    "fault: Online"
+  ],
+  "Protocol": "inet, MTU: 1500",
+  "Link": [
+    "flags     : None",
+    "flags     : Scheduler Keepalives DTE",
+    "flags     : Scheduler Keepalives DTE",
+    "flags     : Keepalives DTE",
+    "flags     : None",
+    "flags     : Keepalives DTE",
+    "flags     : Keepalives DTE",
+    "flags     : Keepalives DTE"
+  ],
+  "Model:": "junosv-firefly",
+  "Device": [
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running Loopback",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running",
+    "flags   : Present Running Down"
+  ],
+  "ids-option untrust-screen": {
+    "icmp": {
+      "ping-death": ""
+    },
+    "tcp": {
+      "syn-flood": {
+        "attack-threshold": "200",
+        "alarm-threshold": "1024",
+        "source-threshold": "1024",
+        "destination-threshold": "2048",
+        "timeout": "20"
+      },
+      "land": ""
+    },
+    "ip": {
+      "source-route-option": "",
+      "tear-drop": ""
+    }
+  },
+  "Allowed": [
+    "host-inbound traffic : dhcp http https ssh telnet",
+    "host-inbound traffic : dhcp http https ssh telnet"
+  ],
+  "Physical": [
+    "interface: ge-0/0/0, Enabled, Physical link is Up",
+    "interface: gr-0/0/0, Enabled, Physical link is Up",
+    "interface: ip-0/0/0, Enabled, Physical link is Up",
+    "interface: lsq-0/0/0, Enabled, Physical link is Up",
+    "interface: lt-0/0/0, Enabled, Physical link is Up",
+    "interface: mt-0/0/0, Enabled, Physical link is Up",
+    "interface: sp-0/0/0, Enabled, Physical link is Up",
+    "interface: ge-0/0/1, Enabled, Physical link is Up",
+    "interface: dsc, Enabled, Physical link is Up",
+    "interface: gre, Enabled, Physical link is Up",
+    "interface: ipip, Enabled, Physical link is Up",
+    "interface: lo0, Enabled, Physical link is Up",
+    "interface: lsi, Enabled, Physical link is Up",
+    "interface: mtun, Enabled, Physical link is Up",
+    "interface: pimd, Enabled, Physical link is Up",
+    "interface: pime, Enabled, Physical link is Up",
+    "interface: pp0, Enabled, Physical link is Up",
+    "interface: ppd0, Enabled, Physical link is Up",
+    "interface: ppe0, Enabled, Physical link is Up",
+    "interface: st0, Enabled, Physical link is Up",
+    "interface: tap, Enabled, Physical link is Up",
+    "interface: vlan, Enabled, Physical link is Down"
+  ],
+  "Interface": [
+    "flags: SNMP-Traps Internal: 0x4000",
+    "flags: Point-To-Point",
+    "flags: Point-To-Point SNMP-Traps Internal: 0x4000",
+    "flags: Point-To-Point SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: Point-To-Point SNMP-Traps Internal: 0x4000",
+    "flags: SNMP-Traps Internal: 0x4000",
+    "flags: Point-To-Point SNMP-Traps",
+    "flags: Point-To-Point SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: Point-To-Point SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: SNMP-Traps",
+    "flags: Point-To-Point",
+    "flags: SNMP-Traps",
+    "flags: Hardware-Down"
+  ],
+  "128.0.0.6": "       --> 0/0",
+  "Destination:": "192.168.121/24, Local: 192.168.121.26, Broadcast: 192.168.121.255",
+  "Copyright": "(c) 1996-2013, Juniper Networks, Inc."
+}

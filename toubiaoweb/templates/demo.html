@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="text-align: center;">
+<input type="file" id="text" onchange="selectFile()"><br>
+<input type="text" id="fileName">
+<input type="radio" name="A" value="a">a
+<input type="radio" name="A" value="b">b
+<input type="radio" name="A" value="c">c
+<button id="btn">aa</button>
+<br>
+<textarea name="" id="" cols="30" rows="10" id="showName"></textarea>
+</body>
+<script>
+    function selectFile(){
+        document.getElementById('fileName').value=document.getElementById('text').value;
+        console.log(window.URL.createObjectURL(document.getElementById('text').files[0]));
+        console.log(document.getElementById('text').files[0]);
+    }
+
+    document.getElementById('btn').onclick=function () {
+
+        var text=document.getElementById('text').value;
+        document.getElementById('fileName').value=text;
+        var radioName;
+        for(var i=1;i<document.getElementsByName('A').length;i++){
+            if(document.getElementsByName('A')[i].checked){
+                console.log(document.getElementsByName('A')[i].value);
+                radioName=document.getElementsByName('A')[i].value
+            }
+        }
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : ActiveXObject("microsoft.XMLHttp")
+        xhr.open("get",'/analyse?text='+text+'&&radioName='+radioName,true);
+        xhr.send();
+        xhr.onreadysattechange = () =>{
+            if(xhr.readystate == 4){
+                if(xhr.status == 200){
+                    var data = xhr.responseTEXT;
+                    document.getElementById('showName').value=data
+                }
+            }
+        }    
+    }
+</script>
+</html>
